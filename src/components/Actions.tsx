@@ -38,6 +38,7 @@ import {
   laserPointerToolIcon,
 } from "./icons";
 import { KEYS } from "../keys";
+import { useTunnels } from "../context/tunnels";
 
 export const SelectedShapeActions = ({
   appState,
@@ -231,6 +232,8 @@ export const ShapesSwitcher = ({
   const laserToolSelected = activeTool.type === "laser";
   const embeddableToolSelected = activeTool.type === "embeddable";
 
+  const { TTDDialogTriggerTunnel } = useTunnels();
+
   return (
     <>
       {SHAPES.map(({ value, icon, key, numericKey, fillable }, index) => {
@@ -338,6 +341,7 @@ export const ShapesSwitcher = ({
           >
             {t("toolBar.mermaidToExcalidraw")}
           </DropdownMenu.Item>
+          <TTDDialogTriggerTunnel.Out />
         </DropdownMenu.Content>
       </DropdownMenu>
     </>
