@@ -248,9 +248,10 @@ export type AppState = {
     // TODO barnabasmolnar/hal-9000-tabs ˇˇ
     // probably rethink this
     // would be cleaner to have
-    // { name: "imageExport" } | { name: "help" } | ... { name: "ai", tab: string }
+    // { name: "imageExport" } | { name: "help" } | ... { name: "ttd", tab: string }
     // not sure yet how much of a refactor/breaking change that would be
-    | { name: "ai"; tab: string }
+    // possibly a breaking change too? might have to leave it as is for now
+    | { name: "ttd"; tab: string }
     | null;
   /**
    * Reflects user preference for whether the default sidebar should be docked.
