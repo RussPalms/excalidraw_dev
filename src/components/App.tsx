@@ -375,6 +375,8 @@ import {
 } from "../cursor";
 import { Emitter } from "../emitter";
 import { TTDDialog } from "./TTDDialog/TTDDialog";
+import { TTDDialogTrigger } from "./TTDDialog/TTDDialogTrigger";
+import { TextIcon } from "./icons";
 
 const AppContext = React.createContext<AppClassProperties>(null!);
 const AppPropsContext = React.createContext<AppProps>(null!);
@@ -1249,9 +1251,24 @@ class App extends React.Component<AppProps, AppState> {
                           isCollaborating={this.props.isCollaborating}
                         >
                           {this.props.children}
+                          <TTDDialogTrigger icon={TextIcon}>
+                            Text to diagram
+                          </TTDDialogTrigger>
                           {typeof this.state.openDialog !== "string" &&
                             this.state.openDialog !== null && (
-                              <TTDDialog __fallback />
+                              <TTDDialog
+                                onTextSubmit={async (input) => {
+                                  await new Promise((resolve) =>
+                                    setTimeout(resolve, 2000),
+                                  );
+
+                                  if (Math.random() < 0.5) {
+                                    throw new Error("An error occurred");
+                                  } else {
+                                    return `flowchart TD\n A[${input}] -->|???| B(Profit)`;
+                                  }
+                                }}
+                              />
                             )}
                         </LayerUI>
 
